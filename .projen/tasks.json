@@ -109,9 +109,6 @@
         },
         {
           "spawn": "compile"
-        },
-        {
-          "spawn": "package"
         }
       ]
     },
@@ -155,25 +152,6 @@
       "steps": [
         {
           "exec": "tsc -w"
-        }
-      ]
-    },
-    "package": {
-      "name": "package",
-      "category": "20.release",
-      "description": "Create an npm tarball",
-      "steps": [
-        {
-          "exec": "rm -fr dist"
-        },
-        {
-          "exec": "mkdir -p dist/js"
-        },
-        {
-          "exec": "yarn pack"
-        },
-        {
-          "exec": "mv *.tgz dist/js/"
         }
       ]
     },

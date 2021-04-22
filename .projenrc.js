@@ -1,8 +1,8 @@
-const { TypeScriptProject } = require('projen');
+const { TypeScriptAppProject } = require('projen');
 
-const project = new TypeScriptProject({
+const project = new TypeScriptAppProject({
   defaultReleaseBranch: 'main',
-  jsiiFqn: "projen.TypeScriptProject",
+  jsiiFqn: "projen.TypeScriptAppProject",
   name: 'projen-test',
 
   /* NodePackageOptions */
