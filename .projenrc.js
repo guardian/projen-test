@@ -2,7 +2,7 @@ const { TypeScriptAppProject } = require('projen');
 
 const project = new TypeScriptAppProject({
   defaultReleaseBranch: 'main',
-  jsiiFqn: "projen.TypeScriptAppProject",
+  jsiiFqn: 'projen.TypeScriptAppProject',
   name: 'projen-test',
 
   /* NodePackageOptions */
@@ -74,7 +74,7 @@ const project = new TypeScriptAppProject({
   // releaseWorkflowSetupSteps: undefined,                                     /* A set of workflow steps to execute in order to setup the workflow container. */
   // workflowBootstrapSteps: 'yarn install --frozen-lockfile && yarn projen',  /* Workflow steps to use in order to bootstrap this repo. */
   // workflowContainerImage: undefined,                                        /* Container image to use for GitHub workflows. */
-  workflowNodeVersion: "14",                                           /* The node version to use in GitHub workflows. */
+  workflowNodeVersion: '14', /* The node version to use in GitHub workflows. */
 
   /* ProjectOptions */
   // clobber: true,                                                            /* Add a `clobber` task which resets the repo to origin. */
