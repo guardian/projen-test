@@ -1,9 +1,26 @@
-const { TypeScriptAppProject } = require('projen');
+const { JsiiProject } = require('projen');
 
-const project = new TypeScriptAppProject({
+const project = new JsiiProject({
+  author: 'Akash Askoolum',
+  authorAddress: 'akash1810@gmail.com',
   defaultReleaseBranch: 'main',
-  jsiiFqn: 'projen.TypeScriptAppProject',
+  jsiiFqn: "projen.JsiiProject",
   name: 'projen-test',
+  repositoryUrl: 'git@github.com:guardian/projen-test.git',
+
+  /* JsiiProjectOptions */
+  // compat: false,                                                            /* Automatically run API compatibility test against the latest version published to npm after compilation. */
+  // compatIgnore: '.compatignore',                                            /* Name of the ignore file for API compatibility tests. */
+  // docgen: true,                                                             /* Automatically generate API.md from jsii. */
+  // eslint: true,                                                             /* Install eslint. */
+  // eslintOptions: undefined,                                                 /* Eslint options. */
+  // excludeTypescript: undefined,                                             /* Accepts a list of glob patterns. */
+  // publishToGo: undefined,                                                   /* Publish Go bindings to a git repository. */
+  // publishToMaven: undefined,                                                /* Publish to maven. */
+  // publishToNuget: undefined,                                                /* Publish to NuGet. */
+  // publishToPypi: undefined,                                                 /* Publish to pypi. */
+  // rootdir: '.',                                                             /* undefined */
+  // sampleCode: true,                                                         /* Generate one-time sample in `src/` and `test/` if there are no files there. */
 
   /* NodePackageOptions */
   // allowLibraryDependencies: true,                                           /* Allow the project to include `peerDependencies` and `bundledDependencies`. */
@@ -14,7 +31,9 @@ const project = new TypeScriptAppProject({
   // autoDetectBin: true,                                                      /* Automatically add all executables under the `bin` directory to your `package.json` file under the `bin` section. */
   // bin: undefined,                                                           /* Binary programs vended with your module. */
   // bundledDeps: undefined,                                                   /* List of dependencies to bundle into this module. */
-  // deps: [],                                                                 /* Runtime dependencies of this module. */
+  deps: [
+    'projen',
+  ], /* Runtime dependencies of this module. */
   // description: undefined,                                                   /* The description is just a string that helps people understand the purpose of the package. */
   // devDeps: [],                                                              /* Build dependencies for this module. */
   // entrypoint: 'lib/index.js',                                               /* Module entrypoint (`main` in `package.json`). */
@@ -31,7 +50,9 @@ const project = new TypeScriptAppProject({
   // packageManager: NodePackageManager.YARN,                                  /* The Node Package Manager used to execute scripts. */
   // packageName: undefined,                                                   /* The "name" in package.json. */
   // peerDependencyOptions: undefined,                                         /* Options for `peerDeps`. */
-  // peerDeps: [],                                                             /* Peer dependencies for this module. */
+  peerDeps: [
+    'projen',
+  ], /* Peer dependencies for this module. */
   // projenCommand: 'npx projen',                                              /* The shell command to use in order to run the projen CLI. */
   // repository: undefined,                                                    /* The repository is the location where the actual code for your package lives. */
   // repositoryDirectory: undefined,                                           /* If the package.json for your package is not in the root directory (for example if it is part of a monorepo), you can specify the directory in which it lives. */
@@ -74,7 +95,7 @@ const project = new TypeScriptAppProject({
   // releaseWorkflowSetupSteps: undefined,                                     /* A set of workflow steps to execute in order to setup the workflow container. */
   // workflowBootstrapSteps: 'yarn install --frozen-lockfile && yarn projen',  /* Workflow steps to use in order to bootstrap this repo. */
   // workflowContainerImage: undefined,                                        /* Container image to use for GitHub workflows. */
-  workflowNodeVersion: '14', /* The node version to use in GitHub workflows. */
+  // workflowNodeVersion: undefined,                                           /* The node version to use in GitHub workflows. */
 
   /* ProjectOptions */
   // clobber: true,                                                            /* Add a `clobber` task which resets the repo to origin. */
@@ -85,22 +106,6 @@ const project = new TypeScriptAppProject({
   // parent: undefined,                                                        /* The parent project, if this project is part of a bigger project. */
   // projectType: ProjectType.UNKNOWN,                                         /* Which type of project this is (library/app). */
   // readme: undefined,                                                        /* The README setup. */
-
-  /* TypeScriptProjectOptions */
-  // compileBeforeTest: undefined,                                             /* Compile the code before running tests. */
-  // disableTsconfig: false,                                                   /* Do not generate a `tsconfig.json` file (used by jsii projects since tsconfig.json is generated by the jsii compiler). */
-  // docgen: false,                                                            /* Docgen by Typedoc. */
-  // docsDirectory: 'docs',                                                    /* Docs directory. */
-  // entrypointTypes: undefined,                                               /* The .d.ts file that includes the type declarations for this module. */
-  // eslint: true,                                                             /* Setup eslint. */
-  // eslintOptions: undefined,                                                 /* Eslint options. */
-  // libdir: 'lib',                                                            /* Typescript  artifacts output directory. */
-  // package: true,                                                            /* Defines a `yarn package` command that will produce a tarball and place it under `dist/js`. */
-  // sampleCode: true,                                                         /* Generate one-time sample in `src/` and `test/` if there are no files there. */
-  // srcdir: 'src',                                                            /* Typescript sources directory. */
-  // testdir: 'test',                                                          /* Jest tests directory. Tests files should be named `xxx.test.ts`. */
-  // tsconfig: undefined,                                                      /* Custom TSConfig. */
-  // typescriptVersion: 'latest',                                              /* TypeScript version to use. */
 });
 
 project.synth();
