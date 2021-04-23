@@ -4,9 +4,13 @@ const project = new JsiiProject({
   author: 'Akash Askoolum',
   authorAddress: 'akash1810@gmail.com',
   defaultReleaseBranch: 'main',
-  jsiiFqn: "projen.JsiiProject",
+  jsiiFqn: 'projen.JsiiProject',
   name: 'projen-test',
   repositoryUrl: 'git@github.com:guardian/projen-test.git',
+
+  scripts: {
+    install: 'npx projen build',
+  },
 
   /* JsiiProjectOptions */
   // compat: false,                                                            /* Automatically run API compatibility test against the latest version published to npm after compilation. */
