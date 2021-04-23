@@ -33,14 +33,6 @@
       ],
       "condition": "git diff --exit-code > /dev/null"
     },
-    "prepare": {
-      "name": "prepare",
-      "steps": [
-        {
-          "exec": "npx projen compile"
-        }
-      ]
-    },
     "bump": {
       "name": "bump",
       "category": "20.release",

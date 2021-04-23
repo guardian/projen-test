@@ -5,12 +5,9 @@ const project = new JsiiProject({
   authorAddress: 'akash1810@gmail.com',
   defaultReleaseBranch: 'main',
   jsiiFqn: 'projen.JsiiProject',
-  name: 'projen-test',
+  name: '@guardian/projen-test',
   repositoryUrl: 'git@github.com:guardian/projen-test.git',
-
-  scripts: {
-    prepare: 'npx projen compile',
-  },
+  releaseBranches: ['main', 'jsii'],
 
   /* JsiiProjectOptions */
   // compat: false,                                                            /* Automatically run API compatibility test against the latest version published to npm after compilation. */

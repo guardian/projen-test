@@ -1,12 +1,11 @@
 {
-  "name": "projen-test",
+  "name": "@guardian/projen-test",
   "repository": {
     "type": "git",
     "url": "git@github.com:guardian/projen-test.git"
   },
   "scripts": {
     "clobber": "npx projen clobber",
-    "prepare": "npx projen prepare",
     "bump": "npx projen bump",
     "unbump": "npx projen unbump",
     "compile": "npx projen compile",
