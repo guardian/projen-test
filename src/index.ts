@@ -54,7 +54,7 @@ export class GuTsLambda extends pj.TypeScriptAppProject {
               cloudFormationStackByTags: false,
               cloudFormationStackName: `${options.stack}-${options.name}`,
             },
-            dependsOn: `${options.name}-upload`,
+            dependencies: [`${options.name}-upload`],
           },
           [`${options.name}-update`]: {
             contentDirectory: `${options.name}-lambda`,
@@ -65,7 +65,7 @@ export class GuTsLambda extends pj.TypeScriptAppProject {
               fileName: `${options.name}-lambda.zip`,
               lookupByTags: true,
             },
-            dependsOn: 'cloudformation',
+            dependencies: ['cloudformation'],
           },
         },
       },
