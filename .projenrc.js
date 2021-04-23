@@ -1,8 +1,8 @@
 const { JsiiProject } = require('projen');
 
 const project = new JsiiProject({
-  author: 'Akash Askoolum',
-  authorAddress: 'akash1810@gmail.com',
+  author: 'The Guardian',
+  authorAddress: 'devx@theguardian.com',
   defaultReleaseBranch: 'main',
   jsiiFqn: 'projen.JsiiProject',
   name: '@guardian/projen-test',
@@ -108,5 +108,11 @@ const project = new JsiiProject({
   // projectType: ProjectType.UNKNOWN,                                         /* Which type of project this is (library/app). */
   // readme: undefined,                                                        /* The README setup. */
 });
+
+// Get the ObjectFile
+const packageJson = project.tryFindObjectFile('package.json');
+
+// Use dot notation to address inside the object
+packageJson.addOverride('publishConfig', { access: 'public' });
 
 project.synth();
