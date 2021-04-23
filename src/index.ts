@@ -39,6 +39,7 @@ export class GuTsLambda extends pj.TypeScriptAppProject {
         regions: [options.region ?? 'eu-west-1'],
         deployments: {
           [`${options.name}-upload`]: {
+            app: `${options.name}`,
             contentDirectory: `${options.name}-lambda`,
             type: 'aws-lambda',
             actions: ['uploadLambda'],
@@ -58,6 +59,7 @@ export class GuTsLambda extends pj.TypeScriptAppProject {
             dependencies: [`${options.name}-upload`],
           },
           [`${options.name}-update`]: {
+            app: `${options.name}`,
             contentDirectory: `${options.name}-lambda`,
             type: 'aws-lambda',
             actions: ['updateLambda'],
