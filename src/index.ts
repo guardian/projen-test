@@ -37,6 +37,36 @@ export class GuTsLambda extends pj.TypeScriptAppProject {
       obj: {
         stacks: [options.stack],
         regions: [options.region ?? 'eu-west-1'],
+        deployments: {
+          [`${options.name}-upload`]: {
+            contentDirectory: `${options.name}-lambda`,
+            type: 'aws-lambda',
+            actions: ['uploadLambda'],
+            parameters: {
+              bucketSsmLookup: true,
+              fileName: `${options.name}-lambda.zip`,
+            },
+          },
+          cloudformation: {
+            type: 'cloud-formation',
+            parameters: {
+              templatePath: `${options.stack}-${options.name}.template.json`,
+              cloudFormationStackByTags: false,
+              cloudFormationStackName: `${options.stack}-${options.name}`,
+            },
+            dependsOn: `${options.name}-upload`,
+          },
+          [`${options.name}-update`]: {
+            contentDirectory: `${options.name}-lambda`,
+            type: 'aws-lambda',
+            actions: ['updateLambda'],
+            parameters: {
+              bucketSsmLookup: true,
+              fileName: `${options.name}-lambda.zip`,
+              lookupByTags: true,
+            },
+          },
+        },
       },
       committed: true,
     });
