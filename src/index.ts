@@ -40,12 +40,11 @@ export class GuTsLambda extends pj.TypeScriptAppProject {
         deployments: {
           [`${options.name}-upload`]: {
             app: `${options.name}`,
-            contentDirectory: `${options.name}-lambda`,
             type: 'aws-lambda',
             actions: ['uploadLambda'],
             parameters: {
               bucketSsmLookup: true,
-              fileName: `${options.name}-lambda.zip`,
+              fileName: `${options.name}.zip`,
               lookupByTags: true,
             },
           },
@@ -60,12 +59,11 @@ export class GuTsLambda extends pj.TypeScriptAppProject {
           },
           [`${options.name}-update`]: {
             app: `${options.name}`,
-            contentDirectory: `${options.name}-lambda`,
             type: 'aws-lambda',
             actions: ['updateLambda'],
             parameters: {
               bucketSsmLookup: true,
-              fileName: `${options.name}-lambda.zip`,
+              fileName: `${options.name}.zip`,
               lookupByTags: true,
             },
             dependencies: ['cloudformation'],
@@ -290,7 +288,7 @@ yarn node-riffraff-artifact`.split('\n'),
               compress: false,
             },
             {
-              action: `${name}-lambda`,
+              action: `${name}`,
               path: 'lib',
               compress: 'zip',
             },
