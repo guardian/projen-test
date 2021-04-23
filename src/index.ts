@@ -16,7 +16,6 @@ export class GuTsLambda extends pj.TypeScriptAppProject {
       license: 'Apache-2.0',
       licensed: true,
       stability: 'experimental',
-      docgen: true,
       typescriptVersion: '4.2.0',
       tsconfig: {
         compilerOptions: {
@@ -212,6 +211,7 @@ ROOT_DIR=$DIR/..
 npm install -g yarn
 
 yarn install --frozen-lockfile
+yarn build
 yarn node-riffraff-artifact`.split('\n'),
     });
 
