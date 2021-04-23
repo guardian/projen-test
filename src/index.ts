@@ -171,6 +171,7 @@ const api = new GuApiLambda(stack, "${stack}-${name}-api", {
     });
 
     new pj.TextFile(this, 'cdk/script/ci', {
+      executable: true,
       lines: `#!/usr/bin/env bash
 set -e
 
@@ -183,5 +184,22 @@ yarn test
 yarn generate`.split('\n'),
     });
 
+    const ciWorkflow = this.github?.addWorkflow('CI');
+
+    ciWorkflow?.on({
+      pull_request: { },
+      workflow_dispatch: { },
+    });
+
+    ciWorkflow?.addJobs({
+      CI: {
+        'runs-on': 'ubuntu-latest',
+        'steps': [
+          { uses: 'actions/checkout@v2' },
+          { uses: 'actions/setup-node@v2.1.5', with: { 'node-version': '14.15.5' } },
+          { run: './cdk/script/ci' },
+        ],
+      },
+    });
   }
 }
