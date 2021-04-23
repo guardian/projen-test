@@ -45,6 +45,7 @@ export class GuTsLambda extends pj.TypeScriptAppProject {
             parameters: {
               bucketSsmLookup: true,
               fileName: `${options.name}-lambda.zip`,
+              lookupByTags: true,
             },
           },
           cloudformation: {
