@@ -65,6 +65,7 @@ export class GuTsLambda extends pj.TypeScriptAppProject {
               fileName: `${options.name}-lambda.zip`,
               lookupByTags: true,
             },
+            dependsOn: 'cloudformation',
           },
         },
       },
