@@ -42,6 +42,8 @@ export class GuTsLambda extends pj.TypeScriptAppProject {
       committed: true,
     });
 
+    this.gitignore.addPatterns('cdk/cdk.out');
+
     new pj.JsonFile(this, 'cdk/cdk.json', {
       committed: true,
       obj: {
