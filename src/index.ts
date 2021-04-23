@@ -236,9 +236,17 @@ yarn node-riffraff-artifact`.split('\n'),
               path: `cdk/cdk.out/${stack}-${name}.template.json`,
               compress: false,
             },
+            {
+              action: `${name}-lambda`,
+              path: 'lib',
+              compress: true,
+            },
           ],
         },
       },
     );
+
+    this.addDevDeps('@types/aws-lambda@8.10.75');
+    this.addDeps('aws-lambda@1.0.6');
   }
 }
