@@ -16,7 +16,7 @@ export class GuTsLambda extends pj.TypeScriptAppProject {
       license: 'Apache-2.0',
       licensed: true,
       stability: 'experimental',
-      typescriptVersion: '4.2.0',
+      typescriptVersion: '4.2.4',
       tsconfig: {
         compilerOptions: {
           esModuleInterop: true,
