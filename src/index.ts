@@ -183,9 +183,7 @@ cd $ROOT_DIR/cdk
 npm install -g yarn
 
 yarn install --frozen-lockfile
-yarn lint
 yarn build
-yarn test
 yarn generate`.split('\n'),
     });
 
