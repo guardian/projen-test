@@ -189,6 +189,22 @@ yarn build
 yarn generate`.split('\n'),
     });
 
+    new pj.TextFile(this, 'script/ci', {
+      executable: true,
+      lines: `#!/usr/bin/env bash
+set -e
+
+DIR=$( cd "$( dirname "\${BASH_SOURCE[0]}" )" && pwd )
+ROOT_DIR=$DIR/..
+
+./cdk/script/ci
+
+npm install -g yarn
+
+yarn install --frozen-lockfile
+yarn node-riffraff-artifact`.split('\n'),
+    });
+
     const ciWorkflow = this.github?.addWorkflow('CI');
 
     ciWorkflow?.on({
@@ -202,9 +218,27 @@ yarn generate`.split('\n'),
         'steps': [
           { uses: 'actions/checkout@v2' },
           { uses: 'actions/setup-node@v2.1.5', with: { 'node-version': '14.15.5' } },
-          { run: './cdk/script/ci' },
+          { run: './script/ci' },
         ],
       },
     });
+
+    this.addDevDeps('@guardian/node-riffraff-artifact@0.2.0');
+    new pj.JsonFile(this, 'artifact.json',
+      {
+        committed: true,
+        obj: {
+          projectName: name,
+          vcsURL: `https://github.com/guardian/${name}`,
+          actions: [
+            {
+              action: 'cloudformation',
+              path: `cdk/cdk.out/${stack}-${name}.template.json`,
+              compress: false,
+            },
+          ],
+        },
+      },
+    );
   }
 }
