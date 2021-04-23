@@ -9,7 +9,7 @@ const project = new JsiiProject({
   repositoryUrl: 'git@github.com:guardian/projen-test.git',
 
   scripts: {
-    install: 'npx projen build',
+    prepare: 'npx projen compile',
   },
 
   /* JsiiProjectOptions */
