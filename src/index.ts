@@ -258,7 +258,7 @@ yarn node-riffraff-artifact`.split('\n'),
             {
               action: `${name}-lambda`,
               path: 'lib',
-              compress: true,
+              compress: 'zip',
             },
           ],
         },
