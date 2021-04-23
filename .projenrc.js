@@ -7,7 +7,6 @@ const project = new JsiiProject({
   jsiiFqn: 'projen.JsiiProject',
   name: '@guardian/projen-test',
   repositoryUrl: 'git@github.com:guardian/projen-test.git',
-  releaseBranches: ['main', 'jsii'],
 
   /* JsiiProjectOptions */
   // compat: false,                                                            /* Automatically run API compatibility test against the latest version published to npm after compilation. */
