@@ -143,7 +143,11 @@ export class GuTsLambda extends pj.TypeScriptAppProject {
       },
     });
 
-    const { stack, name, runtime } = options;
+    const {
+      stack,
+      name,
+      runtime,
+    } = options;
 
     new pj.TextFile(this, 'cdk/bin/cdk.ts', {
       lines: `#!/usr/bin/env node
@@ -162,7 +166,7 @@ const stack = new GuStack(app, "${stack}-${name}", {
 const api = new GuApiLambda(stack, "${stack}-${name}-api", {
     fileName: "${name}.zip",
     handler: "index.handler",
-    runtime: new Runtime("${ runtime ?? 'NODEJS_14_X'}"),
+    runtime: new Runtime("${runtime ?? 'NODEJS_14_X'}"),
     monitoringConfiguration: {noMonitoring: true},
     app: "${name}",
     apis: [{
@@ -194,6 +198,12 @@ yarn generate`.split('\n'),
       lines: `#!/usr/bin/env bash
 set -e
 
+# pretending we're in TeamCity as node-riffraff-artifact doesn't support GHA, yet!
+export BUILD_NUMBER=$GITHUB_RUN_NUMBER
+export BUILD_VCS_NUMBER=$GITHUB_SHA
+export TEAMCITY_BRANCH=$GITHUB_REF
+export TEAMCITY_VERSION=GHA
+
 DIR=$( cd "$( dirname "\${BASH_SOURCE[0]}" )" && pwd )
 ROOT_DIR=$DIR/..
 
@@ -208,8 +218,8 @@ yarn node-riffraff-artifact`.split('\n'),
     const ciWorkflow = this.github?.addWorkflow('CI');
 
     ciWorkflow?.on({
-      pull_request: { },
-      workflow_dispatch: { },
+      pull_request: {},
+      workflow_dispatch: {},
     });
 
     ciWorkflow?.addJobs({
@@ -217,8 +227,17 @@ yarn node-riffraff-artifact`.split('\n'),
         'runs-on': 'ubuntu-latest',
         'steps': [
           { uses: 'actions/checkout@v2' },
-          { uses: 'actions/setup-node@v2.1.5', with: { 'node-version': '14.15.5' } },
-          { run: './script/ci' },
+          {
+            uses: 'actions/setup-node@v2.1.5',
+            with: { 'node-version': '14.15.5' },
+          },
+          {
+            run: './script/ci',
+            env: [{
+              AWS_ACCESS_KEY_ID: '${{ secrets.AWS_ACCESS_KEY_ID }}',
+              AWS_SECRET_ACCESS_KEY: '${{ secrets.AWS_SECRET_ACCESS_KEY }}',
+            }],
+          },
         ],
       },
     });
