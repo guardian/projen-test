@@ -175,6 +175,11 @@ const api = new GuApiLambda(stack, "${stack}-${name}-api", {
       lines: `#!/usr/bin/env bash
 set -e
 
+DIR=$( cd "$( dirname "\${BASH_SOURCE[0]}" )" && pwd )
+ROOT_DIR=$DIR/../..
+
+cd $ROOT_DIR/cdk
+
 npm install -g yarn
 
 yarn install --frozen-lockfile
